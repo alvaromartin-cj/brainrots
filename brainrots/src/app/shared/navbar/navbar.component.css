@@ -1,0 +1,21 @@
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 1.5rem;
+  background: #111827;
+  color: #f9fafb;
+  border-bottom: 1px solid #334155;
+}
+
+.brand {
+  font-weight: 800;
+  letter-spacing: 0.14em;
+}
+
+.user-pill {
+  padding: 0.5rem 0.9rem;
+  background: #1f2937;
+  border-radius: 999px;
+  color: #d1d5db;
+}

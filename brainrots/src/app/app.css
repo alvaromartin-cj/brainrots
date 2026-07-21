@@ -1,0 +1,23 @@
+:host {
+  display: block;
+  min-height: 100vh;
+  background: #020617;
+  color: #f8fafc;
+  font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+.app-shell {
+  display: flex;
+  min-height: 100vh;
+}
+
+.content-shell {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.page-content {
+  flex: 1;
+  background: linear-gradient(135deg, #0f172a, #111827);
+}

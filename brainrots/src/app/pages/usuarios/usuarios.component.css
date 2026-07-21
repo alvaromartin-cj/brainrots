@@ -1,0 +1,29 @@
+.usuarios-page {
+  padding: 2rem;
+  color: #f9fafb;
+}
+
+.usuarios-page h1 {
+  margin: 0 0 1rem;
+  font-size: 1.8rem;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  background: rgba(15, 23, 42, 0.75);
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+th,
+td {
+  padding: 0.9rem 1rem;
+  border-bottom: 1px solid #334155;
+  text-align: left;
+}
+
+th {
+  color: #cbd5e1;
+  font-size: 0.9rem;
+}
