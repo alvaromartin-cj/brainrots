@@ -1,7 +1,60 @@
-<section class="dashboard-page">
-  <h1>BRAINROTS Dashboard</h1>
-  <p>Bienvenido al panel</p>
-  <p class="user-email">Bienvenido: {{ userEmail }}</p>
+<div class="dashboard-container">
 
-  <button type="button" class="logout-btn" (click)="logout()">Cerrar sesión</button>
-</section>
+    <h1 class="title">
+        WEB EN DESARROLLO
+    </h1>
+
+    <h2 class="subtitle">
+        | CONSU |
+    </h2>
+
+    <p class="description">
+        Próximamente podrás coleccionar tus Brainrots favoritos.
+    </p>
+
+    <div class="cards">
+
+        <!-- BALLERINA -->
+
+        <div class="brainrot-card">
+
+            <div class="rarity epic">
+                ✦ ÉPICA ✦
+            </div>
+
+            <img
+                src="/67/ballerina.png"
+                alt="Ballerina Cappuccina">
+
+            <h3>Ballerina Cappuccina</h3>
+
+        </div>
+
+        <!-- TRALALERO -->
+
+        <div class="brainrot-card legendary-card">
+
+            <div class="rarity legendary">
+                ✦ LEGENDARIA ✦
+            </div>
+
+            <img
+                src="/67/tralalero.png"
+                alt="Tralalero Tralala">
+
+            <h3>Tralalero Tralala</h3>
+
+        </div>
+
+    </div>
+
+    <button
+        type="button"
+        class="logout-btn"
+        (click)="logout()">
+
+        Cerrar sesión
+
+    </button>
+
+</div>

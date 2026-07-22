@@ -1,28 +1,343 @@
-.dashboard-page {
-  padding: 2rem;
-  color: #f9fafb;
+.dashboard-container{
+    min-height:100vh;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    text-align:center;
+    padding:40px;
 }
 
-.dashboard-page h1 {
-  margin: 0 0 0.5rem;
-  font-size: 1.8rem;
+.title{
+    color:#fff;
+    font-size:58px;
+    font-weight:900;
+    letter-spacing:6px;
+    text-shadow:
+        0 0 12px #8d4cff,
+        0 0 28px #8d4cff;
+    animation:blink 2s infinite;
+    margin-bottom:10px;
 }
 
-.dashboard-page p {
-  color: #9ca3af;
+.subtitle{
+    color:#b57bff;
+    font-size:30px;
+    margin-bottom:25px;
 }
 
-.user-email {
-  margin-top: 0.75rem;
-  color: #f9fafb;
+.description{
+    color:#d6d6d6;
+    font-size:20px;
+    margin-bottom:60px;
 }
 
-.logout-btn {
-  margin-top: 1rem;
-  border: none;
-  border-radius: 10px;
-  padding: 0.8rem 1rem;
-  background: linear-gradient(90deg, #8b5cf6, #3b82f6);
-  color: white;
-  cursor: pointer;
+/* =======================
+      CARTAS
+======================= */
+
+.cards{
+    display:flex;
+    justify-content:center;
+    gap:70px;
+    flex-wrap:wrap;
+    margin-bottom:60px;
+}
+
+.brainrot-card{
+
+    width:300px;
+
+    padding:18px;
+
+    border-radius:24px;
+
+    position:relative;
+
+    overflow:hidden;
+
+    cursor:pointer;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(36,24,68,.92),
+            rgba(18,18,28,.95)
+        );
+
+    border:2px solid rgba(162,95,255,.45);
+
+    backdrop-filter:blur(18px);
+
+    transition:.45s;
+
+    box-shadow:
+        0 0 25px rgba(125,65,255,.28);
+
+}
+
+.brainrot-card::before{
+
+    content:"";
+
+    position:absolute;
+
+    top:-120%;
+
+    left:-60%;
+
+    width:70%;
+
+    height:340%;
+
+    background:
+
+        linear-gradient(
+            transparent,
+            rgba(255,255,255,.45),
+            transparent
+        );
+
+    transform:rotate(25deg);
+
+    transition:.8s;
+
+}
+
+.brainrot-card:hover::before{
+
+    left:170%;
+
+}
+
+.brainrot-card:hover{
+
+    transform:
+        perspective(900px)
+        rotateX(6deg)
+        rotateY(-8deg)
+        scale(1.06);
+
+    border-color:#b57bff;
+
+    box-shadow:
+        0 0 45px rgba(181,123,255,.85);
+
+}
+
+.legendary-card{
+
+    border:2px solid rgba(255,215,0,.55);
+
+    box-shadow:
+        0 0 25px rgba(255,215,0,.35);
+
+}
+
+.legendary-card:hover{
+
+    border-color:#ffd700;
+
+    box-shadow:
+        0 0 55px rgba(255,215,0,.95);
+
+}
+
+.brainrot-card img{
+
+    width:100%;
+
+    border-radius:18px;
+
+    transition:.45s;
+
+}
+
+.brainrot-card:hover img{
+
+    transform:scale(1.05);
+
+}
+
+.brainrot-card h3{
+
+    margin-top:18px;
+
+    color:white;
+
+    font-size:23px;
+
+    font-weight:700;
+
+    letter-spacing:1px;
+
+}
+
+/* =======================
+        RAREZA
+======================= */
+
+.rarity{
+
+    position:absolute;
+
+    top:15px;
+
+    right:16px;
+
+    padding:6px 12px;
+
+    border-radius:20px;
+
+    font-size:13px;
+
+    font-weight:800;
+
+    letter-spacing:1px;
+
+    text-transform:uppercase;
+
+}
+
+.epic{
+
+    background:linear-gradient(
+        90deg,
+        #8b3dff,
+        #c06bff
+    );
+
+    color:white;
+
+    box-shadow:
+        0 0 15px rgba(171,93,255,.65);
+
+}
+
+
+.legendary{
+
+    background:linear-gradient(
+        90deg,
+        #ffbf00,
+        #ffe066
+    );
+
+    color:#3a2500;
+
+    box-shadow:
+        0 0 18px rgba(255,215,0,.8);
+
+}
+
+/* =======================
+      BOTÓN
+======================= */
+
+.logout-btn{
+
+    padding:14px 38px;
+
+    border:none;
+
+    border-radius:12px;
+
+    cursor:pointer;
+
+    font-size:16px;
+
+    font-weight:700;
+
+    color:white;
+
+    background:linear-gradient(
+        90deg,
+        #6c3bff,
+        #9d4dff
+    );
+
+    transition:.3s;
+
+    box-shadow:
+        0 0 18px rgba(125,76,255,.35);
+
+}
+
+.logout-btn:hover{
+
+    transform:
+        translateY(-3px)
+        scale(1.04);
+
+    box-shadow:
+        0 0 30px rgba(125,76,255,.8);
+
+}
+
+.logout-btn:active{
+
+    transform:scale(.98);
+
+}
+
+/* =======================
+     ANIMACIONES
+======================= */
+
+@keyframes blink{
+
+    0%{
+        opacity:1;
+    }
+
+    50%{
+        opacity:.55;
+    }
+
+    100%{
+        opacity:1;
+    }
+
+}
+
+/* =======================
+      RESPONSIVE
+======================= */
+
+@media(max-width:768px){
+
+    .cards{
+
+        flex-direction:column;
+
+        gap:40px;
+
+    }
+
+    .title{
+
+        font-size:40px;
+
+    }
+
+    .subtitle{
+
+        font-size:22px;
+
+    }
+
+    .brainrot-card{
+
+        width:280px;
+
+    }
+
+    .logout-btn{
+
+        width:100%;
+
+        max-width:280px;
+
+    }
+
 }

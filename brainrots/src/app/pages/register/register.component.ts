@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { AuthService } from '../../core/services/auth.service';
 
 @Component({
@@ -15,53 +15,63 @@ export class RegisterComponent {
   email = '';
   password = '';
   confirmPassword = '';
-  message = '';
-  errorMessage = '';
+  mensajeError = '';
+  mensajeExito = '';
+  registroCompletado = false;
 
-  constructor(private readonly authService: AuthService) {}
+  constructor(
+    private readonly authService: AuthService,
+    private readonly router: Router
+  ) {}
 
   async onSubmit() {
-    this.message = '';
-    this.errorMessage = '';
+    this.mensajeError = '';
 
+    // Validar que los campos no estén vacíos
+    if (!this.email || !this.password || !this.confirmPassword) {
+      this.mensajeError = 'Todos los campos son obligatorios.';
+      return;
+    }
+
+    // Validar que las contraseñas coincidan
     if (this.password !== this.confirmPassword) {
-      this.errorMessage = 'Las contraseñas no coinciden.';
+      this.mensajeError = 'Las contraseñas no coinciden.';
       return;
     }
 
     try {
       const response = await this.authService.register(this.email, this.password);
 
-      console.log('Supabase register response', response);
-
       if (!response.success) {
-        const errorCode =
-          typeof response.error === 'object' && response.error !== null && 'code' in response.error
-            ? (response.error as { code?: string }).code
-            : undefined;
+        // Extraer el mensaje de error
+        const error = response.error;
+        let mensajeError = 'Error al registrar el usuario.';
 
-        if (errorCode === 'over_email_send_rate_limit') {
-          this.errorMessage =
-            'Se ha alcanzado el límite de envío de correos de Supabase. Si estás en desarrollo, desactiva la confirmación por email en Authentication > Providers > Email. Si ya está desactivada, revisa la configuración del proyecto.';
-          return;
+        if (error && typeof error === 'object') {
+          if (error.message) {
+            mensajeError = error.message;
+          } else if (error.code === 'user_already_exists') {
+            mensajeError = 'Este correo electrónico ya está registrado.';
+          }
         }
 
-        const errorMessage =
-          typeof response.error === 'object' && response.error !== null && 'message' in response.error
-            ? (response.error as { message?: string }).message
-            : 'No se pudo crear el usuario.';
-
-        this.errorMessage = errorMessage ?? 'No se pudo crear el usuario.';
+        this.mensajeError = mensajeError;
         return;
       }
 
-      this.message = 'Usuario creado correctamente';
+      // Registro exitoso
+      this.mensajeExito = 'Registrado con éxito';
+      this.registroCompletado = true;
       this.email = '';
       this.password = '';
       this.confirmPassword = '';
     } catch (error) {
-      console.error('Supabase register failure', error);
-      this.errorMessage = 'No se pudo crear el usuario.';
+      this.mensajeError = 'Error al registrar el usuario.';
     }
   }
+
+  irAlLogin() {
+    this.router.navigate(['/']);
+  }
 }
+
