@@ -1,24 +1,50 @@
-<div class="auth-shell">
+<div class="auth-shell auth-background">
   <div class="auth-card">
-    <h1>Crear cuenta</h1>
-    <p>Regístrate con Supabase Auth</p>
+    <!-- Formulario de registro (se oculta si el registro se completó) -->
+    <ng-container *ngIf="!registroCompletado">
+      <h1>Crear cuenta</h1>
+      <p>Regístrate con Supabase Auth</p>
 
-    <form (ngSubmit)="onSubmit()">
-      <label for="email">Email</label>
-      <input id="email" name="email" type="email" [(ngModel)]="email" required />
+      <!-- ngForm permite que Angular maneje la validación del formulario -->
+      <form #registerForm="ngForm" (ngSubmit)="onSubmit()">
+        <label for="email">Email</label>
+        <input
+          id="email"
+          name="email"
+          type="email"
+          [(ngModel)]="email"
+          placeholder="tu@email.com" />
 
-      <label for="password">Password</label>
-      <input id="password" name="password" type="password" [(ngModel)]="password" required />
+        <label for="password">Password</label>
+        <input
+          id="password"
+          name="password"
+          type="password"
+          [(ngModel)]="password"
+          placeholder="Mínimo 6 caracteres" />
 
-      <label for="confirmPassword">Confirmar password</label>
-      <input id="confirmPassword" name="confirmPassword" type="password" [(ngModel)]="confirmPassword" required />
+        <label for="confirmPassword">Confirmar password</label>
+        <input
+          id="confirmPassword"
+          name="confirmPassword"
+          type="password"
+          [(ngModel)]="confirmPassword"
+          placeholder="Confirma tu contraseña" />
 
-      <button type="submit">Registrarse</button>
-    </form>
+        <!-- Mensaje de error centrado encima del botón -->
+        <p class="error" *ngIf="mensajeError && mensajeError.trim()">{{ mensajeError }}</p>
 
-    <p class="success" *ngIf="message">{{ message }}</p>
-    <p class="error" *ngIf="errorMessage">{{ errorMessage }}</p>
+        <!-- Botón submit que dispara (ngSubmit) del formulario -->
+        <button type="submit">Registrarse</button>
+      </form>
 
-    <a routerLink="/">Volver al login</a>
+      <a routerLink="/">Volver al login</a>
+    </ng-container>
+
+    <!-- Mensaje de éxito (se muestra después de completar el registro) -->
+    <div *ngIf="registroCompletado" class="success-container">
+      <h2 class="success-message">{{ mensajeExito }}</h2>
+      <button type="button" (click)="irAlLogin()" class="login-button">Iniciar sesión</button>
+    </div>
   </div>
 </div>
